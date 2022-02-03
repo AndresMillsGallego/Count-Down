@@ -32,6 +32,7 @@ function countDown() {
   let destination = tripDetails[0];
   let today = new Date().getTime();
   let startDiff = adjustTimeZone(tripDetails[1]);
+  console.log(startDiff);
   let tripStart = tripDetails[1].getTime() + startDiff;
   let endDiff = adjustTimeZone(tripDetails[2]);
   let tripEnd = tripDetails[2].getTime() + endDiff;
@@ -39,21 +40,41 @@ function countDown() {
   let tripDuration = Math.floor((tripEnd - tripStart)/1000/60/60/24);
   tripDetails.push(daysUntilTrip, tripDuration);
   let message = `Congratulations!  You are travelling to ${destination}!  Your trip begins in ${daysUntilTrip} days.  You will be spending ${tripDuration} glorious days there!`;
-  displayTrip.innerHTML = message;
-  packItems();
+  renderMessage(message);
+  packItems(tripDetails, 'details');
+  packItems(message, 'message');
   setCounter();
   console.log(today);
   console.log(tripDetails);
+}
+
+function renderMessage(message) {
+  displayTrip.innerHTML = message;
 }
 
 function adjustTimeZone(date) {
   return date.getTimezoneOffset() * 60 * 1000;
 }
 
-function packItems() {
-  let stringyDeets = JSON.stringify(tripDetails);
-  localStorage.setItem('details', stringyDeets);
+function packItems(items, key) {
+  let stringyItems = JSON.stringify(items);
+  localStorage.setItem(key, stringyItems);
 }
 
+function unpackItems() {
+  let unpackedDeets = localStorage.getItem('details');
+  if (unpackedDeets) {
+    let parsedDeets = JSON.parse(unpackedDeets);
+    tripDetails = parsedDeets;
+    setCounter();
+  }
+  let unpackedMessage = localStorage.getItem('message');
+  if (unpackedMessage) {
+    let parsedMessage = JSON.parse(unpackedMessage);
+    renderMessage(parsedMessage);
+  }
+}
+unpackItems();
+console.log(tripDetails);
 setInterval(getDate, 1000);
 form.addEventListener('submit', handleSubmit);
