@@ -12,6 +12,9 @@ body {
   flex-direction: column;
   align-items: center;
   background: url(../img/santa-marta.jpg);
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 
 }
@@ -25,6 +28,12 @@ header {
   border-bottom: 3px double maroon;
 }
 
+nav {
+  width: 75%;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 30px auto;
+}
 form {
   margin: 2rem auto;
   display: flex;
@@ -32,6 +41,11 @@ form {
   background-color:slategrey;
   padding: 1rem;
   color: beige;
+  visibility: hidden;
+}
+
+.visibleForm {
+  visibility: visible;
 }
 
 fieldset {
