@@ -28,12 +28,17 @@ header {
   border-bottom: 3px double maroon;
 }
 
+h1 {
+  font-size: 3rem;
+  padding: 10px;
+}
 nav {
   width: 75%;
   display: flex;
   justify-content: space-evenly;
   margin: 30px auto;
 }
+
 form {
   margin: 2rem auto;
   display: flex;
@@ -65,4 +70,23 @@ label {
 form button {
   margin: 2rem auto;
   margin-bottom: 1rem;
+}
+
+#displayCountdown {
+  border: 5px solid;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: cornsilk;
+}
+
+#displayCountdown div {
+  padding: 10px;
+  margin: 10px;
+  border: 3px solid;
+}
+
+h2 {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 10px;
 }
