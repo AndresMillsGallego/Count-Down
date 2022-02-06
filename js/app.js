@@ -26,12 +26,14 @@ let Trip = function(destination, start, end, duration) {
   this.tripDuration = duration;
 };
 
-// function setCounter() {
-//   let days = tripDetails[3];
-//   let p = document.createElement('p');
-//   p.textContent = days;
-//   document.getElementById('counter').appendChild(p);
-// }
+function setCounter(days) {
+  let counterDiv = document.getElementById('counter');
+  counterDiv.innerHTML = '';
+  let dayCounter = days;
+  let p = document.createElement('p');
+  p.textContent = dayCounter;
+  counterDiv.appendChild(p);
+}
 
 // This takes in the user data to collect destination, trip start and trip end.
 function handleSubmit(e) {
@@ -41,8 +43,13 @@ function handleSubmit(e) {
   console.log(destination, tripDestination);
   let startDate = new Date(e.target.startDate.value);
   let endDate = new Date(e.target.endDate.value);
-  userData.push(destination, startDate, endDate);
-  makeTrip();
+  if (endDate > startDate) {
+    userData.push(destination, startDate, endDate);
+    makeTrip();
+  } else {
+    alert('The end date needs to be after the start date.  Please enter new dates.');
+    form.reset();
+  }
 }
 
 //This takes in the user data to make a new instance of the Trip object.
@@ -90,6 +97,7 @@ function renderCountDown(days, hours, minutes, seconds) {
   displayTrip.appendChild(hourDiv);
   displayTrip.appendChild(minuteDiv);
   displayTrip.appendChild(secondDiv);
+  setCounter(days);
 }
 
 //Function to adjust to current time zone from UTC time.
