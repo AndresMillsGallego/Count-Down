@@ -1,7 +1,7 @@
 'use strict';
 
 // Globals go here
-const test = document.getElementById('testSite');
+const clock = document.getElementById('dateAndTime');
 const form = document.querySelector('form');
 const displayTrip = document.getElementById('displayCountdown');
 const navBar = document.getElementById('mainNav');
@@ -12,10 +12,21 @@ let tripDestination;
 
 //This function gets todays date and time
 function getDate() {
+  clock.innerHTML = '';
   let now = new Date();
   let todaysDate = now.toDateString();
   let todaysTime = now.toLocaleTimeString();
-  test.innerHTML = `${todaysDate} ${todaysTime}`;
+  renderClock(todaysDate, todaysTime);
+}
+
+// This function renders the date and time for the header clock.
+function renderClock(date, time) {
+  let dayDiv = document.createElement('div');
+  dayDiv.textContent = date;
+  let timeDiv = document.createElement('div');
+  timeDiv.textContent = time;
+  clock.appendChild(dayDiv);
+  clock.appendChild(timeDiv);
 }
 
 // Constructor function to make the trip.  Add more in the future?
@@ -26,6 +37,7 @@ let Trip = function(destination, start, end, duration) {
   this.tripDuration = duration;
 };
 
+// This function sets the "days left" to the plane counter in the header.
 function setCounter(days) {
   let counterDiv = document.getElementById('counter');
   counterDiv.innerHTML = '';
