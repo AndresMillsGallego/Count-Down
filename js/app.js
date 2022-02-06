@@ -8,6 +8,7 @@ const navBar = document.getElementById('mainNav');
 const destinationHeader = document.getElementById('destinationHeader');
 let userData = [];
 let trips = [];
+let tripDestination;
 
 //This function gets todays date and time
 function getDate() {
@@ -36,6 +37,8 @@ let Trip = function(destination, start, end, duration) {
 function handleSubmit(e) {
   e.preventDefault();
   let destination = e.target.destination.value;
+  tripDestination = destination;
+  console.log(destination, tripDestination);
   let startDate = new Date(e.target.startDate.value);
   let endDate = new Date(e.target.endDate.value);
   userData.push(destination, startDate, endDate);
@@ -51,7 +54,7 @@ function makeTrip() {
   let newTrip = new Trip(destination, startDate, endDate, tripDuration);
   trips.push(newTrip);
   packItems(trips, destination);
-  console.log(trips);
+  location.reload();
 }
 
 // This is the code that actually counts down to the day you leave on the trip!
@@ -106,14 +109,20 @@ function unpackItems(key) {
   if (unpackedDeets) {
     let parsedDeets = JSON.parse(unpackedDeets);
     trips = parsedDeets;
+    countDown();
+    displayTrip.className = 'visibleDisplay';
+    setInterval(countDown, 1000);
     // setCounter();
+  } else {
+    console.log('no trip brah');
   }
 }
 
 // Simple call back function to add/remove trip.
 function handleClick(event) {
   if (event.target.id === 'clearTrip') {
-    localStorage.removeItem('details');
+    tripDestination = trips[0].destination;
+    localStorage.removeItem(tripDestination);
     location.reload();
   } else if (event.target.id === 'addTrip') {
     form.className = 'visibleForm';
@@ -121,11 +130,10 @@ function handleClick(event) {
 }
 
 // Event listeners and executable code go here.
+
 unpackItems('Santa Marta');
-countDown();
 
 setInterval(getDate, 1000);
-setInterval(countDown, 1000);
 
 form.addEventListener('submit', handleSubmit);
 navBar.addEventListener('click', handleClick);

@@ -72,14 +72,18 @@ form button {
   margin-bottom: 1rem;
 }
 
-#displayCountdown {
+.hiddenDisplay {
+  visibility: hidden;
+}
+
+.visibleDisplay {
+  visibility: visible;
   border: 5px solid;
   display: flex;
   justify-content: space-evenly;
   background-color: cornsilk;
 }
-
-#displayCountdown div {
+.visibleDisplay div {
   padding: 10px;
   margin: 10px;
   border: 3px solid;
