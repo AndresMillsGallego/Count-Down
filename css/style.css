@@ -33,10 +33,24 @@ header {
 nav {
   width: 75%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  align-items: center;
   margin: 30px auto;
 }
 
+nav button {
+  padding: 5px 10px;
+}
+
+nav button:hover {
+  cursor: pointer;
+  background-color: azure;
+}
+
+nav i {
+  font-size: 2rem;
+  color:maroon;
+}
 form {
   margin: 2rem auto;
   display: flex;
@@ -68,8 +82,9 @@ label {
 form button {
   margin: 2rem auto;
   margin-bottom: 1rem;
-  padding: 5px;
+  padding: 10px;
 }
+
 
 .hiddenDisplay {
   visibility: hidden;
@@ -80,12 +95,13 @@ form button {
   border: 3px solid;
   display: flex;
   justify-content: space-evenly;
-  background-color: cornsilk;
+  background-color: rgba(153, 50, 204, 0.85);
 }
 .visibleDisplay div {
   padding: 10px;
-  margin: 10px;
+  margin: 20px 10px;
   border: 3px solid;
+  background-color: rgba(255, 248, 220, 0.9)
 }
 
 h2 {
@@ -94,13 +110,13 @@ h2 {
   margin-bottom: 10px;
   padding: 10px;
   border: 3px solid;
-  background-color: darkturquoise;
+  background-color:rgba(153, 50, 204, 0.85);
 }
 
 #dateAndTime,
 #planeCounter,
 h1 {
-  background-color: cornsilk;
+  background-color: rgba(255, 248, 220, 0.74);
   border: 3px solid;
   text-align: center;
   padding: 10px;

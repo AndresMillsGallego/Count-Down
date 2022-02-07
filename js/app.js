@@ -8,7 +8,8 @@ const navBar = document.getElementById('mainNav');
 const destinationHeader = document.getElementById('destinationHeader');
 let userData = [];
 let trips = [];
-let tripDestination;
+let tripKeys = ['trip1', 'trip2', 'trip3', 'trip4'];
+let tripCounter = 0;
 
 //This function gets todays date and time
 function getDate() {
@@ -51,13 +52,14 @@ function setCounter(days) {
 function handleSubmit(e) {
   e.preventDefault();
   let destination = e.target.destination.value;
-  tripDestination = destination;
-  console.log(destination, tripDestination);
   let startDate = new Date(e.target.startDate.value);
   let endDate = new Date(e.target.endDate.value);
   if (endDate > startDate) {
     userData.push(destination, startDate, endDate);
     makeTrip();
+    tripCounter++;
+    console.log(tripCounter);
+    packItems(tripCounter, 'tripCounter');
   } else {
     alert('The end date needs to be after the start date.  Please enter new dates.');
     form.reset();
@@ -72,7 +74,7 @@ function makeTrip() {
   let tripDuration = Math.floor((endDate.getTime() - startDate.getTime()) / (1000*60*60*24));
   let newTrip = new Trip(destination, startDate, endDate, tripDuration);
   trips.push(newTrip);
-  packItems(trips, destination);
+  packItems(trips, tripKeys[0]);
   location.reload();
 }
 
@@ -132,27 +134,31 @@ function unpackItems(key) {
     countDown();
     displayTrip.className = 'visibleDisplay';
     setInterval(countDown, 1000);
-    // setCounter();
   } else {
     console.log('no trip brah');
   }
 }
 
+function unpackCounter() {
+  let unpackedCounter = localStorage.getItem('tripCounter');
+  let parsedCounter = JSON.parse(unpackedCounter);
+  tripCounter = parsedCounter;
+}
+
 // Simple call back function to add/remove trip.
 function handleClick(event) {
   if (event.target.id === 'clearTrip') {
-    tripDestination = trips[0].destination;
-    localStorage.removeItem(tripDestination);
+    localStorage.removeItem(tripKeys[0]);
     location.reload();
-  } else if (event.target.id === 'addTrip') {
+  } if (event.target.id === 'addTrip') {
     form.className = 'visibleForm';
   }
 }
 
 // Event listeners and executable code go here.
 
-unpackItems('Santa Marta');
-
+unpackCounter();
+unpackItems(tripKeys[0]);
 setInterval(getDate, 1000);
 
 form.addEventListener('submit', handleSubmit);
