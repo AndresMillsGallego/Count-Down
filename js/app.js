@@ -10,6 +10,7 @@ let userData = [];
 let trips = [];
 let tripKeys = ['trip1', 'trip2', 'trip3', 'trip4'];
 let tripCounter = 0;
+let message;
 
 //This function gets todays date and time
 function getDate() {
@@ -73,6 +74,9 @@ function makeTrip() {
   let endDate = userData[2];
   let tripDuration = Math.floor((endDate.getTime() - startDate.getTime()) / (1000*60*60*24));
   let newTrip = new Trip(destination, startDate, endDate, tripDuration);
+  message = `Congratulations!  You are going to ${destination} on ${startDate.toDateString()}.  
+    You will be spending ${tripDuration} glorious days there.`;
+  packItems(message, 'tripMessage');
   trips.push(newTrip);
   packItems(trips, tripKeys[0]);
   location.reload();
@@ -119,6 +123,16 @@ function adjustTimeZone(date) {
   return date.getTimezoneOffset() * 60 * 1000;
 }
 
+//Function that makes a button.
+function renderMessage() {
+  let unpackedMessage = localStorage.getItem('tripMessage');
+  let parsedMessage = JSON.parse(unpackedMessage);
+  let messageDiv = document.getElementById('message');
+  let p = document.createElement('p');
+  p.textContent = parsedMessage;
+  messageDiv.appendChild(p);
+}
+
 //Packs things away to localStorage.  Items are for the items to pack, key is for the key.
 function packItems(items, key) {
   let stringyItems = JSON.stringify(items);
@@ -133,6 +147,7 @@ function unpackItems(key) {
     trips = parsedDeets;
     countDown();
     displayTrip.className = 'visibleDisplay';
+    // renderMessage();
     setInterval(countDown, 1000);
   } else {
     console.log('no trip brah');

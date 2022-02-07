@@ -51,11 +51,12 @@ nav i {
   font-size: 2rem;
   color:maroon;
 }
+
 form {
   margin: 2rem auto;
   display: flex;
   flex-direction: column;
-  background-color:slategrey;
+  background-color:rgba(112, 128, 144, 0.9);
   padding: 1rem;
   color: beige;
   visibility: hidden;
@@ -113,6 +114,15 @@ h2 {
   background-color:rgba(153, 50, 204, 0.85);
 }
 
+#message {
+  border: 3px solid;
+  padding: 10px;
+  background-color: rgba(128, 0, 0, 0.9);
+  max-width: 50%;
+  margin: 10px auto;
+  flex-wrap: wrap;
+}
+
 #dateAndTime,
 #planeCounter,
 h1 {
@@ -130,4 +140,8 @@ h1 {
   border-bottom: 3px double maroon;
   padding-bottom: 5px;
   margin-bottom: 5px;
+}
+
+#counter {
+  margin-top: 10px;
 }
