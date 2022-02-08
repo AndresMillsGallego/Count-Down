@@ -58,9 +58,9 @@ function handleSubmit(e) {
   if (endDate > startDate) {
     userData.push(destination, startDate, endDate);
     makeTrip();
-    tripCounter++;
     console.log(tripCounter);
-    packItems(tripCounter, 'tripCounter');
+    // tripCounter++;
+    // packItems(tripCounter, 'tripCounter');
   } else {
     alert('The end date needs to be after the start date.  Please enter new dates.');
     form.reset();
@@ -78,7 +78,7 @@ function makeTrip() {
     You will be spending ${tripDuration} glorious days there.`;
   packItems(message, 'tripMessage');
   trips.push(newTrip);
-  packItems(trips, tripKeys[0]);
+  packItems(trips, tripKeys[tripCounter]);
   location.reload();
 }
 
@@ -163,7 +163,9 @@ function unpackCounter() {
 // Simple call back function to add/remove trip.
 function handleClick(event) {
   if (event.target.id === 'clearTrip') {
-    localStorage.removeItem(tripKeys[0]);
+    localStorage.removeItem(tripKeys[tripCounter]);
+    tripCounter = 0;
+    message = '';
     location.reload();
   } if (event.target.id === 'addTrip') {
     form.className = 'visibleForm';
@@ -173,7 +175,7 @@ function handleClick(event) {
 // Event listeners and executable code go here.
 
 unpackCounter();
-unpackItems(tripKeys[0]);
+unpackItems(tripKeys[tripCounter]);
 setInterval(getDate, 1000);
 
 form.addEventListener('submit', handleSubmit);
