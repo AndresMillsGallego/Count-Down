@@ -21,13 +21,12 @@ body {
 
 header {
   width: 75%;
-  height: 200px;
   display: flex;
   justify-content:space-evenly;
-  align-content: center;
+  align-items: center;
   padding-bottom: 1rem;
-  border-bottom: 5px double maroon;
-  border-radius: none;
+  border-bottom: 5px double firebrick;
+  border-radius: 0;
 }
 
 nav {
@@ -35,7 +34,7 @@ nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 30px auto;
+  margin: 40px auto;
 }
 
 nav button {
@@ -49,7 +48,13 @@ nav button:hover {
 
 nav i {
   font-size: 2rem;
-  color:maroon;
+  color: firebrick;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 form {
@@ -97,6 +102,7 @@ form button {
   display: flex;
   justify-content: space-evenly;
   background-color: rgba(153, 50, 204, 0.85);
+  width: 60%;
 }
 .visibleDisplay div {
   padding: 10px;
@@ -117,10 +123,17 @@ h2 {
 #message {
   border: 3px solid;
   padding: 10px;
-  background-color: rgba(128, 0, 0, 0.9);
+  background-color:rgba(178, 34, 34, 0.95);
   max-width: 50%;
   margin: 10px auto;
+  margin-top: 60px;
   flex-wrap: wrap;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.25;
+  color:yellowgreen;
+  border-color: black;
 }
 
 #dateAndTime,
@@ -132,12 +145,18 @@ h1 {
   padding: 10px;
 }
 
+#planeCounter,
+h1 {
+  margin-bottom: 25px;
+}
+
 h1 {
   font-size: 3rem;
 }
 
 #dateAndTime div:first-child {
-  border-bottom: 3px double maroon;
+  border-bottom: 3px double firebrick;
+  border-radius: 0;
   padding-bottom: 5px;
   margin-bottom: 5px;
 }

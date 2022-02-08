@@ -147,7 +147,7 @@ function unpackItems(key) {
     trips = parsedDeets;
     countDown();
     displayTrip.className = 'visibleDisplay';
-    // renderMessage();
+    renderMessage();
     setInterval(countDown, 1000);
   } else {
     console.log('no trip brah');
