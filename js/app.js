@@ -45,7 +45,7 @@ function setCounter(days) {
   counterDiv.innerHTML = '';
   let dayCounter = days;
   let p = document.createElement('p');
-  p.textContent = dayCounter;
+  p.textContent = dayCounter + 'd';
   counterDiv.appendChild(p);
 }
 
