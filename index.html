@@ -32,6 +32,14 @@
     <form class="hiddenForm">
       <fieldset>
         <legend>Enter Your Trip Details</legend>
+        <label>Destination Type
+          <select name="location" id="locationType">
+            <option value="" selected disabled hidden>--</option>
+            <option value="tropical">Tropical</option>
+            <option value="urban">Urban</option>
+            <option value="country">Countryside</option>
+          </select>
+        </label>
         <label>Destination
           <input type="text" name="destination">
         </label>
