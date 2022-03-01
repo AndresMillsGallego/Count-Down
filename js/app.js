@@ -10,7 +10,7 @@ let userData = [];
 let trips = [];
 let tripKeys = ['trip1', 'trip2', 'trip3', 'trip4'];
 let tripCounter = 0;
-let message;
+// let message;
 
 //This function gets todays date and time
 function getDate() {
@@ -52,15 +52,15 @@ function setCounter(days) {
 // This takes in the user data to collect destination, trip start and trip end.
 function handleSubmit(e) {
   e.preventDefault();
+  // unpackCounter();
   let destination = e.target.destination.value;
   let startDate = new Date(e.target.startDate.value);
   let endDate = new Date(e.target.endDate.value);
   if (endDate > startDate) {
     userData.push(destination, startDate, endDate);
     makeTrip();
-    console.log(tripCounter);
-    // tripCounter++;
-    // packItems(tripCounter, 'tripCounter');
+    tripCounter++;
+    packItems(tripCounter, 'tripCounter');
   } else {
     alert('The end date needs to be after the start date.  Please enter new dates.');
     form.reset();
@@ -74,11 +74,9 @@ function makeTrip() {
   let endDate = userData[2];
   let tripDuration = Math.floor((endDate.getTime() - startDate.getTime()) / (1000*60*60*24));
   let newTrip = new Trip(destination, startDate, endDate, tripDuration);
-  message = `Congratulations!  You are going to ${destination} on ${startDate.toDateString()}.  
-    You will be spending ${tripDuration} glorious days there.`;
-  packItems(message, 'tripMessage');
   trips.push(newTrip);
   packItems(trips, tripKeys[tripCounter]);
+  userData = [];
   location.reload();
 }
 
@@ -124,14 +122,14 @@ function adjustTimeZone(date) {
 }
 
 //Function that makes a button.
-function renderMessage() {
-  let unpackedMessage = localStorage.getItem('tripMessage');
-  let parsedMessage = JSON.parse(unpackedMessage);
-  let messageDiv = document.getElementById('message');
-  let p = document.createElement('p');
-  p.textContent = parsedMessage;
-  messageDiv.appendChild(p);
-}
+// function renderMessage() {
+//   let unpackedMessage = localStorage.getItem('tripMessage');
+//   let parsedMessage = JSON.parse(unpackedMessage);
+//   let messageDiv = document.getElementById('message');
+//   let p = document.createElement('p');
+//   p.textContent = parsedMessage;
+//   messageDiv.appendChild(p);
+// }
 
 //Packs things away to localStorage.  Items are for the items to pack, key is for the key.
 function packItems(items, key) {
@@ -147,25 +145,28 @@ function unpackItems(key) {
     trips = parsedDeets;
     countDown();
     displayTrip.className = 'visibleDisplay';
-    renderMessage();
     setInterval(countDown, 1000);
   } else {
     console.log('no trip brah');
   }
 }
 
-function unpackCounter() {
-  let unpackedCounter = localStorage.getItem('tripCounter');
-  let parsedCounter = JSON.parse(unpackedCounter);
-  tripCounter = parsedCounter;
-}
+// function unpackCounter() {
+//   let unpackedCounter = localStorage.getItem('tripCounter');
+//   if (unpackedCounter) {
+//     let parsedCounter = JSON.parse(unpackedCounter);
+//     tripCounter = parsedCounter;
+//     console.log(tripCounter);
+//   } else {
+//     tripCounter = 0;
+//   }
+// }
 
 // Simple call back function to add/remove trip.
 function handleClick(event) {
   if (event.target.id === 'clearTrip') {
     localStorage.removeItem(tripKeys[tripCounter]);
     tripCounter = 0;
-    message = '';
     location.reload();
   } if (event.target.id === 'addTrip') {
     form.className = 'visibleForm';
@@ -174,8 +175,10 @@ function handleClick(event) {
 
 // Event listeners and executable code go here.
 
-unpackCounter();
-unpackItems(tripKeys[tripCounter]);
+console.log(tripCounter);
+
+unpackItems(tripKeys[0]);
+
 setInterval(getDate, 1000);
 
 form.addEventListener('submit', handleSubmit);
